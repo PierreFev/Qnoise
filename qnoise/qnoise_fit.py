@@ -10,11 +10,7 @@ import scipy.constants as C
 import scipy.special
 
 
-def num_diff(x, y):
-    """
-    Numerical derivation dy/dx.
-    """
-    return np.gradient(y)/np.gradient(x)
+
 
 
 def xcothx(x):
@@ -79,11 +75,12 @@ def Fcoef(Dt, t, n):
     Fourier coefficients of a time serie (for equally spaced samples).
     """
     if n == 0:
-        return sum(Dt, axis=-1)/len(t)
+        return np.sum(Dt, axis=-1)/len(t)
     else:
-        A = 2*sum(Dt*np.cos(n*2*np.pi*t), axis=-1)/len(t)
-        B = 2*sum(Dt*np.sin(n*2*np.pi*t), axis=-1)/len(t)
+        A = 2*np.sum(Dt*np.cos(n*2*np.pi*t), axis=-1)/len(t)
+        B = 2*np.sum(Dt*np.sin(n*2*np.pi*t), axis=-1)/len(t)
         return [A, B]
+
 
 def qNoise_phAss(I,f,R,T,Iac,f0,N=5):
     """
@@ -94,8 +91,8 @@ def qNoise_phAss(I,f,R,T,Iac,f0,N=5):
     ev = C.e*I*R
     vac = C.e*Iac*R/hf
     n = np.arange(-N, N+1)[:, None]
-    x=(ev+C.h*f-n*hf)/(2.*kbt)
-    x2=(ev-C.h*f-n*hf)/(2.*kbt)
+    x = (ev+C.h*f-n*hf)/(2.*kbt)
+    x2 = (ev-C.h*f-n*hf)/(2.*kbt)
     tmp = sp.special.jv(n, vac)**2 * (xcothx(x)+xcothx(x2))*(C.k*T)/R
     return tmp.sum(axis=0)
 
@@ -105,3 +102,5 @@ def dummy_func():
     """
     pass
 dummy_func.display_str = 'dummy'
+
+

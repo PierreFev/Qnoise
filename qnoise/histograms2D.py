@@ -19,13 +19,13 @@ def getWan(histo, vx, vy, a, n):
     r = np.sqrt((xx[None, :, :] - mx[:, None, None]) ** 2 + (yy[None, :, :] - my[:, None, None]) ** 2) **a
     theta = np.arctan2((yy[None, :, :] - my[:, None, None]), (xx[None, :, :] - mx[:, None, None]))
 
-    wa = np.sum(histo / w[:, None, None] * r * np.cos(n * theta), axis=(-1, -2)) / 2 / pi
-    wb = np.sum(histo / w[:, None, None] * r * np.sin(n * theta), axis=(-1, -2)) / 2 / pi
+    wa = np.sum(histo / w[:, None, None] * r * np.cos(n * theta), axis=(-1, -2)) / 2 / np.pi
+    wb = np.sum(histo / w[:, None, None] * r * np.sin(n * theta), axis=(-1, -2)) / 2 / np.pi
 
     return np.array(wa), np.array(wb)
 
 
-def getMoments(histo, vx, vy, n, m, *args, **kwargs):
+def getMoment(histo, vx, vy, n, m, *args, **kwargs):
     """"
     Computes moments <X^nY^m> of the probability distribution of a 2D histograms array
     """
