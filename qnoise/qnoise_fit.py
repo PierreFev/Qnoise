@@ -82,6 +82,10 @@ def Fcoef(Dt, t, n):
         return [A, B]
 
 
+def QnoisefitI(I, f, R, T, *args, **kwargs):
+    A = xcothx((C.e*I*R-C.h*f)/(2*C.k*T))+ xcothx((C.e*I*R+C.h*f)/(2*C.k*T))
+    return A*C.k*T/R
+
 def qNoise_phAss(I,f,R,T,Iac,f0,N=5):
     """
     Return photoassisted shot-noise for a tunnel junction in the tunneling regime

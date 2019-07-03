@@ -34,6 +34,20 @@ def calcS3env(Idc,I3, R, Tj, Genv):
     return Genv*D3
 
 
+def K3fromW33(W33):
+    """"
+    Convert the W33 into complex cyclic moment K3 with the right prefactors:
+    """
+    K3 = np.pi/2*(W33[..., 1]-W33[..., 0])
+    return K3[..., 0,:]-1j*K3[..., 1,:]
+
+def K1fromW31(W31):
+    """"
+    Convert the W31 into complex cyclic moment K1 with the right prefactors:
+    """
+    K1 = np.pi/2*3*(W31[..., 1]- W31[..., 0])
+    return K1[..., 0,:]+1j*K1[..., 1,:]
+
 def calcSfb(Idc,I3, R, Tj,g1,g2,g3):
     """"
     Computes effect on S3 due to finite impedance of measurement circuit when noise is adiabaticaly modulated
